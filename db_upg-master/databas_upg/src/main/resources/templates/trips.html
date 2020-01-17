@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RAG</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+	<link rel="shortcut icon" href="img/RAG logo.png">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/animate.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<link rel="stylesheet" href="css/responsive.css">
+	<script src="js/js libary/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+	<header class="header">
+		<nav id="navigation">
+			
+			<form action="Search" id="searchbar">
+				<input type="text" name="searchbar" placeholder="Från">
+				<button type="submit" value="Search" class="Search"><i class="fa fa-search"></i></button>
+
+				<input type="text" name="searchbar2" placeholder="Till">
+				<button type="submit" value="Search" class="Search"><i class="fa fa-search"></i></button>
+			</form>
+
+                        <div id="menu">
+                <ul>
+                    <li style="display:inline-block;">
+                        #if($loggedIn == "true")
+                        <a href="logout">
+                            #else
+                            <a href="/">
+                                #end
+
+                                #if($loggedIn == "true")
+                                Sign Out
+                                #else
+                                Sign In
+                                #end</a></li>
+                    <li style="display:inline-block;"><a href="trips">Trips</a></li>
+                    <li style="display:inline-block;"><a href="bookings">My bookings</a></li>
+
+
+			<div id="main">
+			</div>
+		</nav>
+	</header>
+
+	<div id="wrapper">
+		<main id="trips"> #foreach( $trip in $trips )
+			<figure>
+				<h3>
+					<a>$trip.getCity1() - $trip.getCity2()</a>
+				</h3>
+				<figcaption>
+					 Från: $trip.getCity1()
+				</figcaption>
+				<figcaption>
+					Till: $trip.getCity2()
+				</figcaption>
+				<figcaption>
+					<form action="buy">
+					Pris: $trip.getPrice()
+					<button name="buy" type="submit" value="$trip.getTripID()">KÖP</button>
+					</form>
+				</figcaption>
+				
+				<figcaption>
+				    Dag: $trip.getDay_of_week()
+				</figcaption>
+				
+				<figcaption>
+				    Avgång: $trip.getDeparture()
+				</figcaption>
+				
+				<figcaption>
+				    Ankomst: $trip.getArrival()
+				</figcaption>
+					 
+			</figure>
+			#end
+	</div>
+
+
+	<script src="js/headerFunction.js"></script>
+	
+</body>
+
+</html>
